@@ -27,7 +27,7 @@ public static class ArrayFun
             }
             catch (FormatException)
             {
-                Debug.Log("[BL][Funciones: 1] No se a podido convertir en Array/Lista");
+                Debug.LogWarning("[BL][Funciones: 1] No se a podido convertir en Array/Lista");
             }
         }
 
@@ -38,7 +38,7 @@ public static class ArrayFun
     public static List<T> inList<T>(this string texto) => _Array<T>(texto).ToList();
     #endregion
 
-    //Convierte de array a textoo
+    //Convierte de array a texto
     #region inString
     public static string inString<T>(this IEnumerable<T> array)
     {
