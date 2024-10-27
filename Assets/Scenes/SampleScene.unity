@@ -750,12 +750,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 729f9d5a7ef45424aad2b28e4a2252a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  texto: 
-  booleano: 0
-  numero: 0
-  vector: {x: 0, y: 0}
-  otro:
-    vector: {x: 0, y: 0}
+  instanciar:
+    objeto: {fileID: 1564390657496139733, guid: 24e8e39a30428b946b5fd5b4f198fa2e, type: 3}
 --- !u!114 &1909578148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -773,6 +769,8 @@ MonoBehaviour:
   doble: 0
   lista: []
   array: 
+  listaS:
+    lista: []
 --- !u!114 &1909578149
 MonoBehaviour:
   m_ObjectHideFlags: 0
