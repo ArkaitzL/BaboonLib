@@ -8,6 +8,7 @@ public class Pruebas2 : BaboonLib
     [Save] public string texto;
     [Save] public float flotante;
     [Save] public double doble;
+    [Save] public Vector3 vector;
     [Save] public List<string> lista;
     [Save] public int[] array;
     [Save] public SList listaS;
@@ -17,6 +18,7 @@ public class Pruebas2 : BaboonLib
         texto = "adios";
         flotante = 6.7f;
         doble = 787.2;
+        vector = Vector3.down;
         lista = new List<string>() { "hola", "adios" };
         array = new int[3] { 1, 2, 3 };
 

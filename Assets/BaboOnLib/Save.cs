@@ -27,6 +27,10 @@ public class SaveAttribute : Attribute
 public class Save : MonoBehaviour {
 
     private Dictionary<Type, Data> objeto = new Dictionary<Type, Data>();
+    private static JsonSerializerSettings settings = new JsonSerializerSettings
+    {
+        ReferenceLoopHandling = ReferenceLoopHandling.Ignore // Ignora referencias cíclicas
+    };
     public struct Data {
         public object clase; 
         public Dictionary<string, FieldInfo> variables; 
@@ -51,7 +55,7 @@ public class Save : MonoBehaviour {
                     this.valor = valor.ToString();
                 }
                 else { // Objetos
-                    this.valor = JsonConvert.SerializeObject(valor);
+                    this.valor = JsonConvert.SerializeObject(valor, settings);
                 }
             }
             // Cargar valores
@@ -70,7 +74,7 @@ public class Save : MonoBehaviour {
                     return valor;
                 }
                 else  { // Objetos
-                    return JsonConvert.DeserializeObject(valor, tipo_valor);
+                    return JsonConvert.DeserializeObject(valor, tipo_valor, settings);
                 }
             }
 
