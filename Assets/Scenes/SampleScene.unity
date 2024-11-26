@@ -285,7 +285,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1909578147}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Pruebas, Assembly-CSharp
         m_MethodName: Accion
         m_Mode: 1
@@ -297,7 +297,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1909578148}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Pruebas2, Assembly-CSharp
         m_MethodName: Accion
         m_Mode: 1
@@ -459,7 +459,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &745569463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -713,9 +713,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1909578146}
-  - component: {fileID: 1909578147}
-  - component: {fileID: 1909578148}
-  - component: {fileID: 1909578149}
   m_Layer: 0
   m_Name: Pruebas
   m_TagString: Untagged
@@ -738,51 +735,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1909578147
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1909578144}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 729f9d5a7ef45424aad2b28e4a2252a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  instanciar:
-    objeto: {fileID: 1564390657496139733, guid: 24e8e39a30428b946b5fd5b4f198fa2e, type: 3}
---- !u!114 &1909578148
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1909578144}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57ab6dddbeab7e44bb8c0f0949bbcbff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  texto: 
-  flotante: 0
-  doble: 0
-  lista: []
-  array: 
-  listaS:
-    lista: []
---- !u!114 &1909578149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1909578144}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0dcf5130fb6f92499cd7d9cc685d377, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
