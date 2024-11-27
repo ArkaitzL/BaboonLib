@@ -23,7 +23,8 @@ public class CarpetaContextMenu : Editor
 
         foreach (ColorCarpeta cc in colores)
         {
-            if (cc.textura != null) return;
+            //Continua si ya tiene uno y es igual
+            if (cc.textura != null && cc.textura.GetPixel(0, 0).Equals(cc.color)) continue;
 
             Texture2D textura = new Texture2D(16, 16, TextureFormat.RGBA32, false);
             for (int y = 0; y < textura.height; y++)

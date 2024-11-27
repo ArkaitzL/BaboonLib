@@ -54,3 +54,8 @@ MonoBehaviour:
       serializedVersion: 2
       rgba: 4288256409
     textura: {fileID: 0}
+  - nombre: majenta
+    color:
+      serializedVersion: 2
+      rgba: 4284689180
+    textura: {fileID: 0}

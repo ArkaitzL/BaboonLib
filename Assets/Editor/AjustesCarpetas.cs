@@ -31,7 +31,6 @@ public class AjustesCarpetas : ScriptableObject
         if (colores != null) {
             CarpetaContextMenu.SetColores(colores);
         }
-
     }
     // Recargar unity
     // ** PENDIENTE **
