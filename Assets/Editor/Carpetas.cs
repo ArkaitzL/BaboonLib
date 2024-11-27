@@ -4,8 +4,12 @@ using UnityEditor;
 [InitializeOnLoad]
 public class Carpetas : MonoBehaviour
 {
-    [SerializeField] public static ListaCarpetas listaCarpetas;
-    private static Texture2D iconoCarpeta;
+    // Lista de las carpetas pintadas
+    [SerializeField] private static ListaCarpetas listaCarpetas;
+    public static ListaCarpetas ListaCarpetas { get => listaCarpetas; set => listaCarpetas = value; }
+
+
+    private static Texture2D iconoCarpeta, carpetaVacia;
 
     static Carpetas()
     {
@@ -13,16 +17,17 @@ public class Carpetas : MonoBehaviour
         EditorApplication.projectWindowItemOnGUI += Buscar;
         // Obtiene el ícono de carpeta predeterminado
         iconoCarpeta = EditorGUIUtility.FindTexture("Folder Icon");
+        carpetaVacia = EditorGUIUtility.FindTexture("FolderEmpty Icon");
     }
 
     private static void Buscar(string guid, Rect rect)
     {
         // Sale si no tiene carpetas que dibujar
-        if (listaCarpetas == null) {
-            Debug.LogWarning("Asigna una lista en Ajustes");
+        if (ListaCarpetas == null) {
+            Debug.LogWarning("Asigna una paleta en Ajustes");
             return;
         }
-        if (listaCarpetas.Count() == 0) return;
+        if (ListaCarpetas.Count() == 0) return;
 
         // Busca la ruta de la carpeta
         string ruta = AssetDatabase.GUIDToAssetPath(guid);
@@ -33,19 +38,23 @@ public class Carpetas : MonoBehaviour
         // Coge el nombre de la carpeta
         string carpeta = System.IO.Path.GetFileName(ruta);
 
-        for (int i = 0; i < listaCarpetas.Count(); i++)
+        for (int i = 0; i < ListaCarpetas.Count(); i++)
         {
             //Si no es una de nuestras carpetas continua
-            if (!listaCarpetas.ContainsKey(carpeta)) continue;
+            if (!ListaCarpetas.ContainsKey(carpeta)) continue;
 
-            Pintar(rect, listaCarpetas.GetValue(carpeta));
+            Pintar(
+                rect,
+                ListaCarpetas.GetValue(carpeta),
+                AssetDatabase.FindAssets("", new[] { ruta }).Length == 0
+            );
 
             // Como ya ha dibujado algo termina con esta carpeta
             break;
         }
     }
 
-    private static void Pintar(Rect rect, Color32 color)
+    private static void Pintar(Rect rect, Color32 color, bool vacio)
     {
 
         // Calcula el tamaño 
@@ -64,7 +73,10 @@ public class Carpetas : MonoBehaviour
         GUI.color = color;
 
         // Dibuja el ícono centrado en el área de la carpeta
-        GUI.DrawTexture(new Rect(xPos, yPos, tamano, tamano), iconoCarpeta);
+        GUI.DrawTexture(
+            new Rect(xPos, yPos, tamano, tamano),
+            !vacio ? iconoCarpeta : carpetaVacia
+       );
         GUI.color = Color.white; // Restaura el color después de dibujar
     }
 }

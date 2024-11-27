@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "Lista[X]", menuName = "Listacarpetas", order = 1)]
+[CreateAssetMenu(fileName = "Paleta[X]", menuName = "Paletacarpetas", order = 1)]
 public class ListaCarpetas : ScriptableObject
 {
     // Esta lista actuará como el "diccionario" interno

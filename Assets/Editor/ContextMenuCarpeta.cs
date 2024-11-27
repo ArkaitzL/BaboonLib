@@ -6,29 +6,17 @@ public class CarpetaContextMenu : Editor
     // COLORES  ***
 
     // Colores diponibles
-    private class ColoreCarpeta
-    {
-        public string nombre;
-        public Color32 color;
-
-        public ColoreCarpeta(string nombre, Color32 color)
-        {
-            this.nombre = nombre;
-            this.color = color;
-        }
-
+    private static ColorCarpeta[] colores;
+    public static void SetColores(ColorCarpeta[] nuevosColores) {
+        colores = nuevosColores;
     }
-    private static ColoreCarpeta[] colores = {
-        new ColoreCarpeta("Azul", Color.blue),
-        new ColoreCarpeta("Rojo", Color.red),
-        new ColoreCarpeta("Verde", Color.green),
-    };
+
 
     // Logica de cambio de color
     private static void CambiarColor(Color color, string carpeta)
     {
         // Añade la carpeta
-        Carpetas.listaCarpetas.Add(carpeta, color);
+        Carpetas.ListaCarpetas.Add(carpeta, color);
         ActualizarSO();
     }
 
@@ -36,8 +24,8 @@ public class CarpetaContextMenu : Editor
     private static void RestaurarColor(string carpeta)
     {
         // Elimina la carpeta
-        if (!Carpetas.listaCarpetas.ContainsKey(carpeta)) return;
-        Carpetas.listaCarpetas.Remove(carpeta);
+        if (!Carpetas.ListaCarpetas.ContainsKey(carpeta)) return;
+        Carpetas.ListaCarpetas.Remove(carpeta);
         ActualizarSO();
     }
 
@@ -74,7 +62,7 @@ public class CarpetaContextMenu : Editor
 
                 // Agregar opciones al menú
                 menu.AddItem(new GUIContent("Color/Restaurar"), false, () => RestaurarColor(carpeta));
-                foreach (ColoreCarpeta cc in colores)
+                foreach (ColorCarpeta cc in colores)
                 {
                     menu.AddItem(
                         new GUIContent($"Color/{cc.nombre}"),
@@ -92,7 +80,7 @@ public class CarpetaContextMenu : Editor
 
     private static void ActualizarSO() {
         // Marca el ScriptableObject como sucio (modificado)
-        EditorUtility.SetDirty(Carpetas.listaCarpetas);
+        EditorUtility.SetDirty(Carpetas.ListaCarpetas);
         // Guarda los cambios en el disco
         AssetDatabase.SaveAssets();
     }

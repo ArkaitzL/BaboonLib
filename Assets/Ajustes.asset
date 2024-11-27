@@ -13,3 +13,36 @@ MonoBehaviour:
   m_Name: Ajustes
   m_EditorClassIdentifier: 
   listaCarpetas: {fileID: 11400000, guid: d3428ad82e7372140943fc188ad02fe0, type: 2}
+  colores:
+  - nombre: Azul
+    color:
+      serializedVersion: 2
+      rgba: 4294941030
+  - nombre: Rojo
+    color:
+      serializedVersion: 2
+      rgba: 4281545702
+  - nombre: Verde
+    color:
+      serializedVersion: 2
+      rgba: 4284927027
+  - nombre: Amarillo
+    color:
+      serializedVersion: 2
+      rgba: 4283229951
+  - nombre: Naranja
+    color:
+      serializedVersion: 2
+      rgba: 4281565439
+  - nombre: Morado
+    color:
+      serializedVersion: 2
+      rgba: 4294928025
+  - nombre: Rosa
+    color:
+      serializedVersion: 2
+      rgba: 4288256511
+  - nombre: Gris
+    color:
+      serializedVersion: 2
+      rgba: 4288256409
