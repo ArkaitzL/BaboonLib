@@ -40,7 +40,7 @@ public class CarpetaContextMenu : Editor
 
 
     // Logica de cambio de color
-    private static void CambiarColor(string color, string carpeta)
+    public static void CambiarColor(string color, string carpeta)
     {
         // Añade la carpeta
         Carpetas.ListaCarpetas.Add(carpeta, color);
@@ -48,7 +48,7 @@ public class CarpetaContextMenu : Editor
     }
 
     // Restaurar color
-    private static void RestaurarColor(string carpeta)
+    public static void RestaurarColor(string carpeta)
     {
         // Elimina la carpeta
         if (!Carpetas.ListaCarpetas.ContainsKey(carpeta)) return;
@@ -84,26 +84,11 @@ public class CarpetaContextMenu : Editor
 
             if (currentEvent.type == EventType.ContextClick && rect.Contains(currentEvent.mousePosition))
             {
-                // Si el clic derecho es dentro de la carpeta, abrir el menú contextual
-                GenericMenu menu = new GenericMenu();
-
-                // Agregar opciones al menú
-                menu.AddItem(new GUIContent("Color/Restaurar"), false, () => RestaurarColor(carpeta));
-                foreach (ColorCarpeta cc in colores)
-                {
-                    // Convertir el color a formato hexadecimal
-                    string colorHex = ColorUtility.ToHtmlStringRGB(cc.color);
-                    string coloredText = $"<color=#{colorHex}>{cc.nombre}</color>";
-                    menu.AddItem(
-                        new GUIContent($"Color/{cc.nombre}", cc.textura),
-                        false, 
-                        () => CambiarColor(cc.nombre, carpeta)
-                    );
-                }
-
-                // Mostrar el menú
-                menu.ShowAsContext();
-
+                //Abre la ventana flotante con los colores
+                PopupWindow.Show(
+                     new Rect(currentEvent.mousePosition, Vector2.zero),
+                     new PopupMenuCarpetas(colores, carpeta)
+                 );
                 currentEvent.Use();
             }
         }
