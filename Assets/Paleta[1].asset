@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   datos:
   - nombre: PruebaCarpetas
-    color: Verde
+    color: Amarillo

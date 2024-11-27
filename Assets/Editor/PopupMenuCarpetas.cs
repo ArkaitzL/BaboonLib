@@ -1,4 +1,4 @@
-using UnityEditor;
+ï»¿using UnityEditor;
 using UnityEngine;
 
 public class PopupMenuCarpetas : PopupWindowContent
@@ -13,7 +13,7 @@ public class PopupMenuCarpetas : PopupWindowContent
         carpetaSeleccionada = carpeta;
     }
 
-    // Define el tamaño de la ventana
+    // Define el tamaÃ±o de la ventana
     public override Vector2 GetWindowSize()
     {
         return new Vector2(193, colores.Length * 10);
@@ -22,13 +22,12 @@ public class PopupMenuCarpetas : PopupWindowContent
     // Dibuja la ventana
     public override void OnGUI(Rect rect)
     {
-
         EditorGUILayout.LabelField("Colores:", EditorStyles.boldLabel);
         GUILayout.BeginHorizontal();
 
         // Colores 
         int fila = 2;
-        if (GUILayout.Button("X", GUILayout.Width(24), GUILayout.Height(24)))
+        if (GUILayout.Button("-", GUILayout.Width(24), GUILayout.Height(24)))
         {
             CarpetaContextMenu.RestaurarColor(carpetaSeleccionada);
             editorWindow.Close();
@@ -36,7 +35,7 @@ public class PopupMenuCarpetas : PopupWindowContent
 
         foreach (var cc in colores)
         {
-            // Botón con el nombre del color
+            // BotÃ³n con el nombre del color
             if (GUILayout.Button(cc.textura, GUILayout.Width(24), GUILayout.Height(24)))
             {
                 CarpetaContextMenu.CambiarColor(cc.nombre, carpetaSeleccionada);
