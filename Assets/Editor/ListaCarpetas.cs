@@ -12,11 +12,11 @@ public class ListaCarpetas : ScriptableObject
     public class Datoscarpeta
     {
         public string nombre;
-        public Color32 color;
+        public string color;
     }
 
     // Método para agregar o reemplazar un elemento
-    public void Add(string nombre, Color32 color)
+    public void Add(string nombre, string color)
     {
         // Verifica si el nombre ya existe
         int index = FindIndexByNombre(nombre);
@@ -61,7 +61,7 @@ public class ListaCarpetas : ScriptableObject
     }
 
     // Método para obtener el valor (color) de una clave (nombre)
-    public Color32 GetValue(string nombre)
+    public string GetValue(string nombre)
     {
         int index = FindIndexByNombre(nombre);
         if (index != -1)
@@ -70,6 +70,6 @@ public class ListaCarpetas : ScriptableObject
         }
 
         // Devuelve un valor por defecto si no se encuentra
-        return default(Color32);
+        return "";
     }
 }

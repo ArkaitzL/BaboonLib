@@ -7,6 +7,17 @@ public class CarpetaContextMenu : Editor
 
     // Colores diponibles
     private static ColorCarpeta[] colores;
+    public static Color32 GetColor(string nombre) {
+        // Buscar el ColorCarpeta que tenga el nombre que coincide
+        foreach (ColorCarpeta cc in colores)
+        {
+            if (cc.nombre != nombre) continue;
+            return cc.color;
+        }
+
+        // Si no se encuentra, se puede devolver un valor por defecto
+        return default(Color32);
+    }
     public static void SetColores(ColorCarpeta[] nuevosColores) {
         colores = nuevosColores;
 
@@ -29,7 +40,7 @@ public class CarpetaContextMenu : Editor
 
 
     // Logica de cambio de color
-    private static void CambiarColor(Color color, string carpeta)
+    private static void CambiarColor(string color, string carpeta)
     {
         // Añade la carpeta
         Carpetas.ListaCarpetas.Add(carpeta, color);
@@ -82,7 +93,7 @@ public class CarpetaContextMenu : Editor
                 {
                     menu.AddItem(
                         new GUIContent($"Color/{cc.nombre}", cc.textura),
-                        false, () => CambiarColor(cc.color, carpeta)
+                        false, () => CambiarColor(cc.nombre, carpeta)
                     );
                 }
 

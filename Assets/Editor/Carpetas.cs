@@ -43,9 +43,13 @@ public class Carpetas : MonoBehaviour
             //Si no es una de nuestras carpetas continua
             if (!ListaCarpetas.ContainsKey(carpeta)) continue;
 
+            Color32 color = CarpetaContextMenu.GetColor(
+                ListaCarpetas.GetValue(carpeta)
+            );
+
             Pintar(
                 rect,
-                ListaCarpetas.GetValue(carpeta),
+                color,
                 AssetDatabase.FindAssets("", new[] { ruta }).Length == 0
             );
 

@@ -14,6 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   datos:
   - nombre: PruebaCarpetas
-    color:
-      serializedVersion: 2
-      rgba: 4284927027
+    color: Rojo
