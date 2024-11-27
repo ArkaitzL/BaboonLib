@@ -4,23 +4,7 @@ using UnityEditor;
 [InitializeOnLoad]
 public class Carpetas : MonoBehaviour
 {
-    private class CarpetaInfo {
-        public string nombre;
-        public Color color;
-
-        public CarpetaInfo(string nombre, Color color)
-        {
-            this.nombre = nombre;
-            this.color = color;
-        }
-    }
-    // Info de las carpetas   [CAMBIAR]
-    private static readonly CarpetaInfo[] carpetas = {              // <-- INFO
-        new CarpetaInfo(
-            "PruebaCarpetas",
-            new Color(0.5f, 0.8f, 0.5f)
-        )
-    };
+    [SerializeField] public static ListaCarpetas listaCarpetas;
     private static Texture2D iconoCarpeta;
 
     static Carpetas()
@@ -33,25 +17,35 @@ public class Carpetas : MonoBehaviour
 
     private static void Buscar(string guid, Rect rect)
     {
+        // Sale si no tiene carpetas que dibujar
+        if (listaCarpetas == null) {
+            Debug.LogWarning("Asigna una lista en Ajustes");
+            return;
+        }
+        if (listaCarpetas.Count() == 0) return;
+
+        // Busca la ruta de la carpeta
         string ruta = AssetDatabase.GUIDToAssetPath(guid);
+
         // Si no es carpeta salimos
         if (!AssetDatabase.IsValidFolder(ruta)) return;
+
         // Coge el nombre de la carpeta
         string carpeta = System.IO.Path.GetFileName(ruta);
 
-        for (int i = 0; i < carpetas.Length; i++)
+        for (int i = 0; i < listaCarpetas.Count(); i++)
         {
             //Si no es una de nuestras carpetas continua
-            if (carpeta != carpetas[i].nombre) continue;
+            if (!listaCarpetas.ContainsKey(carpeta)) continue;
 
-            Pintar(rect, i);
+            Pintar(rect, listaCarpetas.GetValue(carpeta));
 
             // Como ya ha dibujado algo termina con esta carpeta
             break;
         }
     }
 
-    private static void Pintar(Rect rect, int i) 
+    private static void Pintar(Rect rect, Color32 color)
     {
 
         // Calcula el tamaño 
@@ -64,10 +58,10 @@ public class Carpetas : MonoBehaviour
 
         // Centra el ícono
         float xPos = rect.x;
-        float yPos = rect.y; 
+        float yPos = rect.y;
 
         // Aplica un color al ícono
-        GUI.color = carpetas[i].color; 
+        GUI.color = color;
 
         // Dibuja el ícono centrado en el área de la carpeta
         GUI.DrawTexture(new Rect(xPos, yPos, tamano, tamano), iconoCarpeta);
