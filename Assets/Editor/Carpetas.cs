@@ -120,6 +120,13 @@ public class Carpetas : MonoBehaviour
         float xPos = rect.x;
         float yPos = rect.y;
 
+        // Ajustar tamaño y posicion
+        tamano *= 0.5f;
+
+        xPos *= 1.2f;
+        //yPos = (yPos + 1500) / rect.height;
+
+
         // Aplica un color al ícono
         if (color != null) GUI.color = (Color32)color;
 
