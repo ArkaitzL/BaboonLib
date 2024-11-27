@@ -9,6 +9,20 @@ public class CarpetaContextMenu : Editor
     private static ColorCarpeta[] colores;
     public static void SetColores(ColorCarpeta[] nuevosColores) {
         colores = nuevosColores;
+
+        foreach (ColorCarpeta cc in colores)
+        {
+            Texture2D textura = new Texture2D(16, 16, TextureFormat.RGBA32, false);
+            for (int y = 0; y < textura.height; y++)
+            {
+                for (int x = 0; x < textura.width; x++)
+                {
+                    textura.SetPixel(x, y, cc.color);
+                }
+            }
+            textura.Apply();
+            cc.textura = textura;
+        }
     }
 
 
@@ -64,8 +78,9 @@ public class CarpetaContextMenu : Editor
                 menu.AddItem(new GUIContent("Color/Restaurar"), false, () => RestaurarColor(carpeta));
                 foreach (ColorCarpeta cc in colores)
                 {
+                    Texture2D testTexture = Texture2D.redTexture;
                     menu.AddItem(
-                        new GUIContent($"Color/{cc.nombre}"),
+                        new GUIContent($"Color/{cc.nombre}", testTexture),  // cc.textura <------ BUG
                         false, () => CambiarColor(cc.color, carpeta)
                     );
                 }

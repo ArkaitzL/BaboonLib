@@ -43,6 +43,7 @@ public class ColorCarpeta
 {
     public string nombre;
     public Color32 color;
+    [HideInInspector] public Texture2D textura;
 
     public ColorCarpeta(string nombre, Color32 color)
     {

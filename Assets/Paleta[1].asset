@@ -12,8 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e49ddbd37ce44e4faf95a3f0701313e, type: 3}
   m_Name: Paleta[1]
   m_EditorClassIdentifier: 
-  datos:
-  - nombre: PruebaCarpetas
-    color:
-      serializedVersion: 2
-      rgba: 4294928025
+  datos: []
