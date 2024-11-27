@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class ListaCarpetas : ScriptableObject
 {
     // Esta lista actuará como el "diccionario" interno
-    [SerializeField] public List<Datoscarpeta> datos;
+    [HideInInspector] public List<Datoscarpeta> datos;
 
     // Clase para almacenar los datos
     [System.Serializable]

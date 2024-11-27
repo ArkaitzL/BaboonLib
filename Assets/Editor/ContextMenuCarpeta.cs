@@ -91,9 +91,13 @@ public class CarpetaContextMenu : Editor
                 menu.AddItem(new GUIContent("Color/Restaurar"), false, () => RestaurarColor(carpeta));
                 foreach (ColorCarpeta cc in colores)
                 {
+                    // Convertir el color a formato hexadecimal
+                    string colorHex = ColorUtility.ToHtmlStringRGB(cc.color);
+                    string coloredText = $"<color=#{colorHex}>{cc.nombre}</color>";
                     menu.AddItem(
                         new GUIContent($"Color/{cc.nombre}", cc.textura),
-                        false, () => CambiarColor(cc.nombre, carpeta)
+                        false, 
+                        () => CambiarColor(cc.nombre, carpeta)
                     );
                 }
 
