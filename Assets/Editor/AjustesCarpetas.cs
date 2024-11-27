@@ -7,7 +7,8 @@ public class AjustesCarpetas : ScriptableObject
     [Space][Header("Cambia la Paleta de las carpetas: ")]
     [SerializeField] private ListaCarpetas listaCarpetas;
     [Header("Cambia los Colores de las carpetas: ")]
-    [SerializeField] private ColorCarpeta[] colores = {
+    // [HideInInspector]
+    [SerializeField] public ColorCarpeta[] colores = {
         new ColorCarpeta("Azul", new Color(0.4f, 0.6f, 1.0f)),  // Soft Blue
         new ColorCarpeta("Rojo", new Color(0.9f, 0.2f, 0.2f)),  // Vivid Red
         new ColorCarpeta("Verde", new Color(0.2f, 0.8f, 0.4f)),  // Emerald Green
@@ -17,7 +18,6 @@ public class AjustesCarpetas : ScriptableObject
         new ColorCarpeta("Rosa", new Color(1.0f, 0.6f, 0.6f)),  // Coral Pink
         new ColorCarpeta("Gris", new Color(0.6f, 0.6f, 0.6f)),  // Soft Gray
     };
-
 
     // Cambia el valor en el Inspector
     private void OnValidate()
