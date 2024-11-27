@@ -50,6 +50,5 @@ public class ColorCarpeta
         this.nombre = nombre;
         this.color = color;
     }
-
 }
 

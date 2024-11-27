@@ -60,14 +60,19 @@ public class Carpetas : MonoBehaviour
         // Calcula el tamaño 
         float tamano = rect.height;                                 // <--TAMAÑO
 
-        if (rect.x > 40f) // Carpeta Principal
-        {
-            tamano *= 0.8f;
-        }
-
         // Centra el ícono
         float xPos = rect.x;
         float yPos = rect.y;
+
+        if (rect.height != 16f) // Carpeta Principal
+        {
+            tamano -= 14;
+        }
+
+        if (rect.height == 16 && rect.x < 20) //Icono pequeño
+        {
+            xPos += 3;
+        }
 
         // Aplica un color al ícono
         GUI.color = color;

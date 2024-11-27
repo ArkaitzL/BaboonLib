@@ -12,6 +12,8 @@ public class CarpetaContextMenu : Editor
 
         foreach (ColorCarpeta cc in colores)
         {
+            if (cc.textura != null) return;
+
             Texture2D textura = new Texture2D(16, 16, TextureFormat.RGBA32, false);
             for (int y = 0; y < textura.height; y++)
             {
@@ -78,9 +80,8 @@ public class CarpetaContextMenu : Editor
                 menu.AddItem(new GUIContent("Color/Restaurar"), false, () => RestaurarColor(carpeta));
                 foreach (ColorCarpeta cc in colores)
                 {
-                    Texture2D testTexture = Texture2D.redTexture;
                     menu.AddItem(
-                        new GUIContent($"Color/{cc.nombre}", testTexture),  // cc.textura <------ BUG
+                        new GUIContent($"Color/{cc.nombre}", cc.textura),
                         false, () => CambiarColor(cc.color, carpeta)
                     );
                 }
