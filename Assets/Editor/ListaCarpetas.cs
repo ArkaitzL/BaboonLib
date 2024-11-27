@@ -5,53 +5,80 @@ using System.Collections.Generic;
 public class ListaCarpetas : ScriptableObject
 {
     // Esta lista actuará como el "diccionario" interno
-    [HideInInspector] public List<Datoscarpeta> datos;
+    //[HideInInspector]
+    [SerializeField]
+    public List<DatosCarpeta> datos;
 
-    // Clase para almacenar los datos
-    [System.Serializable]
-    public class Datoscarpeta
+    // ADD -> Agreagar un elemento
+    public void AddColor(string nombre, string color)
     {
-        public string nombre;
-        public string color;
+        Add(nombre, color, null, null);
     }
 
-    // Método para agregar o reemplazar un elemento
-    public void Add(string nombre, string color)
+    public void AddIcono(string nombre, Texture2D icono)
+    {
+        Add(nombre, null, icono, null);
+    }
+
+    public void AddIconoColor(string nombre, string colorIcono)
+    {
+        Add(nombre, null, null, colorIcono);
+    }
+
+    private void Add(string nombre, string color, Texture2D icono, string colorIcono) 
     {
         // Verifica si el nombre ya existe
         int index = FindIndexByNombre(nombre);
 
         if (index != -1)  // Si existe, reemplaza el valor
         {
-            datos[index].color = color;
+            if (color != null) datos[index].color = color;
+            if (icono != null) datos[index].icono = icono;
+            if (colorIcono != null) datos[index].colorIcono = colorIcono;
+
+            return;
         }
-        else  // Si no existe, agrega un nuevo elemento
-        {
-            datos.Add(new Datoscarpeta { nombre = nombre, color = color });
-        }
+
+        // Si no existe, agrega un nuevo elemento
+        datos.Add(new DatosCarpeta { nombre = nombre, color = color, icono = icono, colorIcono = colorIcono });
+
     }
 
-    // Método para eliminar un elemento por su nombre
-    public void Remove(string nombre)
+    // REMOVE -> Elimina un elemento
+    public void RemoveColor(string nombre) 
+    {
+        Remove(nombre, true, false, false);
+    }
+    public void RemoveIcono(string nombre)
+    {
+        Remove(nombre, false, true, false);
+    }
+    public void RemoveIconoColor(string nombre)
+    {
+        Remove(nombre, false, false, true);
+    }
+
+    private void Remove(string nombre, bool color, bool icono, bool colorIcono)
     {
         int index = FindIndexByNombre(nombre);
-
         if (index != -1)
+        {
+            if (color) datos[index].color = null;
+            if (icono) datos[index].icono = null;
+            if (colorIcono) datos[index].colorIcono = null;
+        }
+
+        // LO elimina si no queda ningun dato guardao
+        if (datos[index].color == null && datos[index].icono == null && datos[index].colorIcono == null)
         {
             datos.RemoveAt(index);
         }
     }
 
-    // Método para verificar si existe una clave (nombre)
+    // CONTAINSKEY -> Busca 
     public bool ContainsKey(string nombre)
     {
-        return FindIndexByNombre(nombre) != -1;
-    }
-
-    // Método para obtener el número de elementos
-    public int Count()
-    {
-        return datos.Count;
+        return datos.FindIndex(x => x.nombre == nombre) != -1;
     }
 
     // Método privado para encontrar el índice de un elemento por su nombre
@@ -60,16 +87,31 @@ public class ListaCarpetas : ScriptableObject
         return datos.FindIndex(x => x.nombre == nombre);
     }
 
-    // Método para obtener el valor (color) de una clave (nombre)
-    public string GetValue(string nombre)
+    // COUNT -> Longitud de la lista
+    public int Count()
+    {
+        return datos.Count;
+    }
+
+    // GETVALUE -> Devuelve todos los datos
+    public DatosCarpeta GetValue(string nombre)
     {
         int index = FindIndexByNombre(nombre);
         if (index != -1)
         {
-            return datos[index].color;
+            return datos[index];
         }
 
-        // Devuelve un valor por defecto si no se encuentra
-        return "";
+        return null;
     }
+}
+
+// Clase para almacenar los datos
+[System.Serializable]
+public class DatosCarpeta
+{
+    public string nombre;
+    public string color;
+    public Texture2D icono;
+    public string colorIcono;
 }

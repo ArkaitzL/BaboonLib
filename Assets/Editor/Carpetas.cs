@@ -43,15 +43,38 @@ public class Carpetas : MonoBehaviour
             //Si no es una de nuestras carpetas continua
             if (!ListaCarpetas.ContainsKey(carpeta)) continue;
 
-            Color32 color = CarpetaContextMenu.GetColor(
-                ListaCarpetas.GetValue(carpeta)
-            );
+            DatosCarpeta datos = ListaCarpetas.GetValue(carpeta);
+            if (datos == null) continue;
 
-            Pintar(
-                rect,
-                color,
-                AssetDatabase.FindAssets("", new[] { ruta }).Length == 0
-            );
+            // Color carpeta
+            if (datos.color != null)
+            {
+                Color32? color = CarpetaContextMenu.GetColor(
+                    datos.color
+                );
+                if (color != null)
+                {
+                    Pintar(
+                        rect,
+                        (Color32) color,
+                        AssetDatabase.FindAssets("", new[] { ruta }).Length == 0
+                    );
+                }
+            }
+
+            // Icono
+            if (datos.icono != null)
+            {
+                Color32? color = CarpetaContextMenu.GetColor(
+                  datos.colorIcono
+                );
+
+                Icono(
+                    rect,
+                    datos.icono,
+                    color
+                );
+            }
 
             // Como ya ha dibujado algo termina con esta carpeta
             break;
@@ -60,9 +83,8 @@ public class Carpetas : MonoBehaviour
 
     private static void Pintar(Rect rect, Color32 color, bool vacio)
     {
-
         // Calcula el tamaño 
-        float tamano = rect.height;                                 // <--TAMAÑO
+        float tamano = rect.height;                                 
 
         // Centra el ícono
         float xPos = rect.x;
@@ -73,7 +95,7 @@ public class Carpetas : MonoBehaviour
             tamano -= 14;
         }
 
-        if (rect.height == 16 && rect.x < 20) //Icono pequeño
+        if (rect.height == 16 && rect.x < 20) //Icono pequeño - Carpeta Principal
         {
             xPos += 3;
         }
@@ -85,7 +107,27 @@ public class Carpetas : MonoBehaviour
         GUI.DrawTexture(
             new Rect(xPos, yPos, tamano, tamano),
             !vacio ? iconoCarpeta : carpetaVacia
-       );
+        );
+        GUI.color = Color.white; // Restaura el color después de dibujar
+    }
+
+    private static void Icono(Rect rect, Texture2D icono, Color32? color) 
+    {
+        // Calcula el tamaño 
+        float tamano = rect.height;
+
+        // Centra el ícono
+        float xPos = rect.x;
+        float yPos = rect.y;
+
+        // Aplica un color al ícono
+        if (color != null) GUI.color = (Color32)color;
+
+        // Dibuja el ícono centrado en el área de la carpeta
+        GUI.DrawTexture(
+            new Rect(xPos, yPos, tamano, tamano),
+            icono
+        );
         GUI.color = Color.white; // Restaura el color después de dibujar
     }
 }

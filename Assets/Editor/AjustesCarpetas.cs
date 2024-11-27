@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.IO;
+using UnityEditor;
 using UnityEngine;
 
 //[CreateAssetMenu(fileName = "Ajustes[Nuevo]", menuName = "AjustesCarpetas", order = 1)]
@@ -6,7 +9,7 @@ public class AjustesCarpetas : ScriptableObject
     // Variable que hace referencia a la instancia de ListaCarpetas
     [Space][Header("Cambia la Paleta de las carpetas: ")]
     [SerializeField] private ListaCarpetas listaCarpetas;
-    [Header("Cambia los Colores de las carpetas: ")]
+    [Header(" Colores de las carpetas: ")]
     // [HideInInspector]
     [SerializeField] public ColorCarpeta[] colores = {
         new ColorCarpeta("Azul", new Color(0.4f, 0.6f, 1.0f)),  // Soft Blue
@@ -18,6 +21,8 @@ public class AjustesCarpetas : ScriptableObject
         new ColorCarpeta("Rosa", new Color(1.0f, 0.6f, 0.6f)),  // Coral Pink
         new ColorCarpeta("Gris", new Color(0.6f, 0.6f, 0.6f)),  // Soft Gray
     };
+    [Header("Iconos disponibles: ")]
+    [SerializeField] public List<Texture2D> iconos = new List<Texture2D>();
 
     // Cambia el valor en el Inspector
     private void OnValidate()
@@ -31,10 +36,14 @@ public class AjustesCarpetas : ScriptableObject
         if (colores != null) {
             CarpetaContextMenu.SetColores(colores);
         }
+
+        if (iconos != null)
+        {
+            CarpetaContextMenu.Iconos = iconos.ToArray();
+        }
     }
     // Recargar unity
     // ** PENDIENTE **
-
 }
 
 [System.Serializable]

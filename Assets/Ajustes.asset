@@ -54,3 +54,20 @@ MonoBehaviour:
       serializedVersion: 2
       rgba: 4288256409
     textura: {fileID: 0}
+  iconos:
+  - {fileID: 2800000, guid: 7cb545290217202499ccec09bfb5ce69, type: 3}
+  - {fileID: 2800000, guid: 3178f1b0711a0c34c9eec1d4dacbf7dc, type: 3}
+  - {fileID: 2800000, guid: 5c0568ad9386ea74aa6451c6a0d8348e, type: 3}
+  - {fileID: 2800000, guid: a993be999d7ffa244820fc02d6199f38, type: 3}
+  - {fileID: 2800000, guid: eb443996efdeb1e4580d9d5f7743d8be, type: 3}
+  - {fileID: 2800000, guid: ca5e613bf675275409634919c54ad78e, type: 3}
+  - {fileID: 2800000, guid: 06d154333f920304ea78bda4eb75a90c, type: 3}
+  - {fileID: 2800000, guid: c5226fef0a4eac743962fc2d8993a66a, type: 3}
+  - {fileID: 2800000, guid: c5610335a1ad9ee44834cd5956ca552a, type: 3}
+  - {fileID: 2800000, guid: 30707d2097df7bc4a9780bba318b602f, type: 3}
+  - {fileID: 2800000, guid: 17794c04618075849ac50237bc18a28f, type: 3}
+  - {fileID: 2800000, guid: 6c9d9a445e4880741a9903fd1562fae5, type: 3}
+  - {fileID: 2800000, guid: 136c9e93d57c1f64c82334b41ed4146d, type: 3}
+  - {fileID: 2800000, guid: dc136b2b9f2762f46b6adcfdc275ce95, type: 3}
+  - {fileID: 2800000, guid: 40498cfd638847645a224b77704ddf95, type: 3}
+  - {fileID: 2800000, guid: 88ea169b1eb9d9b4c89c637626495ac8, type: 3}

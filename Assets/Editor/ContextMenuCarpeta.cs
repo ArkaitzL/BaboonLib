@@ -3,11 +3,55 @@ using UnityEditor;
 
 public class CarpetaContextMenu : Editor
 {
+
+    // ICONOS **
+
+    private static Texture2D[] iconos;
+    public static Texture2D[] Iconos { get => iconos; set => iconos = value; }
+
+    // Logica de cambio de iconos
+    public static void CambiarIcono(Texture2D icono, string carpeta)
+    {
+        // Añade la carpeta
+        Carpetas.ListaCarpetas.AddIcono(carpeta, icono);
+        ActualizarSO();
+    }
+
+    // Restaurar icono
+    public static void RestaurarIcono(string carpeta)
+    {
+        // Elimina la carpeta
+        if (!Carpetas.ListaCarpetas.ContainsKey(carpeta)) return;
+        Carpetas.ListaCarpetas.RemoveIcono(carpeta);
+        ActualizarSO();
+    }
+
+    // Logica de cambio del color de los iconos
+    public static void CambiarIconoColor(string color, string carpeta)
+    {
+        // Añade la carpeta
+        Carpetas.ListaCarpetas.AddIconoColor(carpeta, color);
+        ActualizarSO();
+    }
+
+    // Restaurar icono
+    public static void RestaurarIconoColor(string carpeta)
+    {
+        // Elimina la carpeta
+        if (!Carpetas.ListaCarpetas.ContainsKey(carpeta)) return;
+        Carpetas.ListaCarpetas.RemoveIconoColor(carpeta);
+        ActualizarSO();
+    }
+
+    // ICONOS **
+
+
     // COLORES  ***
 
     // Colores diponibles
     private static ColorCarpeta[] colores;
-    public static Color32 GetColor(string nombre) {
+
+    public static Color32? GetColor(string nombre) {
         // Buscar el ColorCarpeta que tenga el nombre que coincide
         foreach (ColorCarpeta cc in colores)
         {
@@ -16,7 +60,7 @@ public class CarpetaContextMenu : Editor
         }
 
         // Si no se encuentra, se puede devolver un valor por defecto
-        return default(Color32);
+        return null;
     }
     public static void SetColores(ColorCarpeta[] nuevosColores) {
         colores = nuevosColores;
@@ -44,7 +88,7 @@ public class CarpetaContextMenu : Editor
     public static void CambiarColor(string color, string carpeta)
     {
         // Añade la carpeta
-        Carpetas.ListaCarpetas.Add(carpeta, color);
+        Carpetas.ListaCarpetas.AddColor(carpeta, color);
         ActualizarSO();
     }
 
@@ -53,7 +97,7 @@ public class CarpetaContextMenu : Editor
     {
         // Elimina la carpeta
         if (!Carpetas.ListaCarpetas.ContainsKey(carpeta)) return;
-        Carpetas.ListaCarpetas.Remove(carpeta);
+        Carpetas.ListaCarpetas.RemoveColor(carpeta);
         ActualizarSO();
     }
 
@@ -88,7 +132,7 @@ public class CarpetaContextMenu : Editor
                 //Abre la ventana flotante con los colores
                 PopupWindow.Show(
                      new Rect(currentEvent.mousePosition, Vector2.zero),
-                     new PopupMenuCarpetas(colores, carpeta)
+                     new PopupMenuCarpetas(colores, iconos, carpeta)
                  );
                 currentEvent.Use();
             }
