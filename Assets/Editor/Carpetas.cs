@@ -113,18 +113,36 @@ public class Carpetas : MonoBehaviour
 
     private static void Icono(Rect rect, Texture2D icono, Color32? color) 
     {
-        // Calcula el tamaño 
+        // Tamaño del icono
         float tamano = rect.height;
 
         // Centra el ícono
         float xPos = rect.x;
         float yPos = rect.y;
 
-        // Ajustar tamaño y posicion
-        tamano *= 0.5f;
+        if (rect.height != 16f) // Carpeta Principal
+        {
+            tamano *= 0.5f;
 
-        xPos *= 1.2f;
-        //yPos = (yPos + 1500) / rect.height;
+            xPos = rect.x + (rect.width - tamano) / 0.8f; // Centrado horizontalmente
+            yPos = rect.y + (rect.height - tamano) / 2; // Centrado verticalmente
+        }
+        else if(rect.x > 20) // Carpeta secundaria
+        {
+            tamano *= 0.6f;
+
+            xPos = rect.x + 9f; // Centrado horizontalmente
+            yPos = rect.y + (rect.height - tamano); // Centrado verticalmente
+        }
+
+        if (rect.height == 16 && rect.x < 20) //Icono pequeño - Carpeta Principal
+        {
+            tamano *= 0.6f;
+
+            xPos = rect.x + 11f; // Centrado horizontalmente
+            yPos = rect.y + (rect.height - tamano); // Centrado verticalmente
+        }
+
 
 
         // Aplica un color al ícono
