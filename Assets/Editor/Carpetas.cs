@@ -7,9 +7,9 @@ public class Carpetas : MonoBehaviour
     // Lista de las carpetas pintadas
     [SerializeField] private static ListaCarpetas listaCarpetas;
     public static ListaCarpetas ListaCarpetas { get => listaCarpetas; set => listaCarpetas = value; }
-
-
     private static Texture2D iconoCarpeta, carpetaVacia;
+
+    public static float xPosN = 1f, yPosN = 1f, tamN = 1;
 
     static Carpetas()
     {
@@ -113,36 +113,44 @@ public class Carpetas : MonoBehaviour
 
     private static void Icono(Rect rect, Texture2D icono, Color32? color) 
     {
+        // Ocultar icono con carpetas pequeñas
+        if (rect.height == 16f) return;
+
         // Tamaño del icono
-        float tamano = rect.height;
+        float tamano = rect.height * 0.4f;
 
         // Centra el ícono
-        float xPos = rect.x;
-        float yPos = rect.y;
+        float xPos = rect.x + (rect.width - tamano) / 1f;
+        float yPos = rect.y + (rect.height - tamano) / 1.7f;
 
-        if (rect.height != 16f) // Carpeta Principal
-        {
-            tamano *= 0.5f;
+        //Ajustar tamaño y posicion desde ajustes
+        tamano *= tamN;
+        xPos *= xPosN;
+        yPos *= yPosN;
 
-            xPos = rect.x + (rect.width - tamano) / 0.8f; // Centrado horizontalmente
-            yPos = rect.y + (rect.height - tamano) / 2; // Centrado verticalmente
-        }
-        else if(rect.x > 20) // Carpeta secundaria
-        {
-            tamano *= 0.6f;
 
-            xPos = rect.x + 9f; // Centrado horizontalmente
-            yPos = rect.y + (rect.height - tamano); // Centrado verticalmente
-        }
+        //if (rect.height != 16f) // Carpeta Principal
+        //{
+        //    tamano *= 0.4f;
 
-        if (rect.height == 16 && rect.x < 20) //Icono pequeño - Carpeta Principal
-        {
-            tamano *= 0.6f;
+        //    xPos = rect.x + (rect.width - tamano) / 1f; // Centrado horizontalmente
+        //    yPos = rect.y + (rect.height - tamano) / 1.7f; // Centrado verticalmente
+        //}
+        //else if(rect.x > 20) // Carpeta secundaria
+        //{
+        //    tamano *= 0.6f;
 
-            xPos = rect.x + 11f; // Centrado horizontalmente
-            yPos = rect.y + (rect.height - tamano); // Centrado verticalmente
-        }
+        //    xPos = rect.x + 9f; // Centrado horizontalmente
+        //    yPos = rect.y + (rect.height - tamano); // Centrado verticalmente
+        //}
 
+        //if (rect.height == 16 && rect.x < 20) //Icono pequeño - Carpeta Principal
+        //{
+        //    tamano *= 0.6f;
+
+        //    xPos = rect.x + 11f; // Centrado horizontalmente
+        //    yPos = rect.y + (rect.height - tamano); // Centrado verticalmente
+        //}
 
 
         // Aplica un color al ícono

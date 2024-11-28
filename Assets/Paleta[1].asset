@@ -15,5 +15,5 @@ MonoBehaviour:
   datos:
   - nombre: PruebaCarpetas
     color: Azul
-    icono: {fileID: 2800000, guid: 17794c04618075849ac50237bc18a28f, type: 3}
-    colorIcono: Rojo
+    icono: {fileID: 2800000, guid: 30707d2097df7bc4a9780bba318b602f, type: 3}
+    colorIcono: Verde

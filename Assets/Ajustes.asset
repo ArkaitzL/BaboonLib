@@ -14,6 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   listaCarpetas: {fileID: 11400000, guid: d3428ad82e7372140943fc188ad02fe0, type: 2}
   colores:
+  - nombre: Negro
+    color:
+      serializedVersion: 2
+      rgba: 4279900698
+    textura: {fileID: 0}
   - nombre: Azul
     color:
       serializedVersion: 2
@@ -54,6 +59,9 @@ MonoBehaviour:
       serializedVersion: 2
       rgba: 4288256409
     textura: {fileID: 0}
+  tamN: 1
+  xPosN: 1
+  yPosN: 1
   iconos:
   - {fileID: 2800000, guid: 7cb545290217202499ccec09bfb5ce69, type: 3}
   - {fileID: 2800000, guid: 3178f1b0711a0c34c9eec1d4dacbf7dc, type: 3}
