@@ -3,14 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PRUEBA2 : Save
+public class PRUEBA2 : MonoBehaviour
 {
-    [SerializeField] string nombre;
-    [SerializeField] SUBPRUEBA subprueba;
+    //[SerializeField] SUBPRUEBA subprueba1, subprueba2;
 
     [Serializable]
-    public class SUBPRUEBA 
+    public class SUBPRUEBA : Save
     {
         public bool activo;
+        public string nombre;
     }
 }
