@@ -3,6 +3,37 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+/// HACER:
+
+/// BUGS
+/// -> CAMBIO DE NOMBRE
+///     -> Tengo que modificar el json y no el nombre del palayerprefab. El nombre del player prefab siempre es Save:SaveOB
+
+/// UI:
+/// -> Ver SaveData
+/// -> Referencia a los SaveGO
+/// -> Espacios en memoria
+///     -> Info
+///     -> Cambiar de espacios
+///     -> Nuevo
+///     -> Eliminar
+
+/// INSTANCIAS
+/// -> Generar prefabs creados a partir de un GO con un SaveGO con sus datos
+
+/// TRANSFORM
+/// -> Poder guardar automaticamente el transform del gameobject
+
+/// SCRPTABLEOBJECT
+/// -> Como usarlo
+/// -> Añadir SaveScript a Escena
+/// -> Crear SaveGO Hijo
+/// -> Crear SaveData (Con limite de 1)
+
+/// OPCIONAL
+/// -> ESPACIOS -> Crear una clase estatica que administre los espacios para que tanto SaveScript como SaveEditor la usen para ObtenerNombre() y CargarEspacio()
+
+
 [DefaultExecutionOrder(-99)]
 public class SaveScript : MonoBehaviour
 {
@@ -16,11 +47,12 @@ public class SaveScript : MonoBehaviour
     }
 
     // Espacios en memoria
-    private List<string> espacio = new List<string>();
+    private List<string> espacios = new List<string>();
     private int usando = 0;
 
-    const string NombreEspacioDefault = "Save";
     public const string MisEspacios = "MisEspacios";
+    const string NombreEspacioDefault = "Save";
+    const string EspacioModificado = " (NEW)";
 
     // Instancia
     public static SaveScript instancia;
@@ -34,7 +66,7 @@ public class SaveScript : MonoBehaviour
         Singleton();
 
         // Administra los espacios en memoria
-        Espacios();
+        CargarEspacios();
 
         // Carga los datos
         Cargar(typeof(SaveData).Name);
@@ -61,11 +93,17 @@ public class SaveScript : MonoBehaviour
     {
         if (!pause) return;
         IniciarGuardado();
+
+        // Administra los espacios en memoria
+        GuardarEspacios();
     }
 
     private void OnApplicationQuit()
     {
         IniciarGuardado();
+
+        // Administra los espacios en memoria
+        GuardarEspacios();
     }
 
     // Inicia el metodo de guardado
@@ -163,47 +201,68 @@ public class SaveScript : MonoBehaviour
     // OTROS
 
     // Obten el nombre del playerpref
-    private string ObtenerNombre(string nombre) => $"{espacio[usando]}:{nombre}";
+    private string ObtenerNombre(string nombre) => $"{espacios[usando]}:{nombre}";  // Modificar tambien el de SaveEditor
 
-    // ESPACIOS
+    // ELIMINAR
 
     // Eliminar todos los datos guardados
     [ContextMenu("Eliminar Todo")]
     private void EliminarTodo()
     {
-        foreach (string nombre in espacio)  {
+        foreach (string nombre in espacios)  {
             PlayerPrefs.DeleteKey(nombre);
         }
         PlayerPrefs.Save();
     }
 
-    private void Espacios()
+    // ESPACIOS
+
+    private void CargarEspacios()
     {
+        // Obtener la cadena de PlayerPrefs
+        string lista = PlayerPrefs.GetString(MisEspacios, "");
+
+        // Si hay datos, los carga
+        if (!string.IsNullOrEmpty(lista))
+        {
+            // Convertir la cadena de nuevo a una lista de strings
+            espacios = new List<string>(lista.Split(','));
+        }
+
         // Crea un espacio en memoria si no existe
-        if (espacio.Count == 0) NuevoEspacio(NombreEspacioDefault);
+        if (espacios.Count == 0) NuevoEspacio(NombreEspacioDefault);
+    }
+
+    private void GuardarEspacios() 
+    {
+        string lista = string.Join(",", espacios);
+
+        // Guardar la cadena en PlayerPrefs
+        PlayerPrefs.SetString(MisEspacios, lista);
+        PlayerPrefs.Save();
     }
 
     // Crear espacios en memoria
     private void NuevoEspacio(string nombre)
     {
-        espacio.Add(NombreEspacio(nombre));
+        espacios.Add(NombreEspacio(nombre));
     }
 
     // Asegura que los nombres sean unicos
     private string NombreEspacio(string nombre)
     {
-        const string Modificar = " (NEW)";
-
         if (UsandoEspacio(nombre))
         {
-            return NombreEspacio(nombre + Modificar); ;
+            return NombreEspacio(nombre + EspacioModificado); ;
         }
 
         return nombre;
     }
 
     // Comprueba si existe un nombre igual
-    private bool UsandoEspacio(string nombre) => espacio.Any((string usado) => usado == nombre);
+    private bool UsandoEspacio(string nombre) => espacios.Any((string usado) => usado == nombre);
+
+    // CLASES
 
     [Serializable]
     private class Almacen

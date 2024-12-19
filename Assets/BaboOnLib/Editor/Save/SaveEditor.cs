@@ -70,23 +70,34 @@ public class SaveEditor
     // Cambia el nombre de playerpref
     public static void CambiarNombre(string viejo, string nuevo)
     {
-        SaveScript.MisEspacios;
+        //string lista = PlayerPrefs.GetString(SaveScript.MisEspacios, "");
 
-        string nuevoNombre = ObtenerNombre(nuevo);
-        string viejoNombre = ObtenerNombre(viejo);
+        //// Si hay datos, los carga
+        //if (string.IsNullOrEmpty(lista)) return;
 
-        if (!PlayerPrefs.HasKey(viejoNombre)) return;
+        //// Convertir la cadena de nuevo a una lista de strings
+        //List<string> espacios = new List<string>(lista.Split(','));
 
-        // Obtén el valor asociado con la clave vieja
-        string valor = PlayerPrefs.GetString(viejoNombre);
+        //for (int i = 0; i < espacios.Count; i++)
+        //{
+        //    string nuevoNombre = ObtenerNombre(espacios[i], nuevo);
+        //    string viejoNombre = ObtenerNombre(espacios[i], viejo);
 
-        // Elimina la clave vieja
-        PlayerPrefs.DeleteKey(viejoNombre);
+        //    if (!PlayerPrefs.HasKey(viejoNombre)) return;
 
-        // Guarda el valor en la nueva clave
-        PlayerPrefs.SetString(nuevoNombre, valor);
+        //    // Obtén el valor asociado con la clave vieja
+        //    string valor = PlayerPrefs.GetString(viejoNombre);
 
-        // Guardar los cambios en PlayerPrefs
-        PlayerPrefs.Save();
+        //    // Elimina la clave vieja
+        //    PlayerPrefs.DeleteKey(viejoNombre);
+
+        //    // Guarda el valor en la nueva clave
+        //    PlayerPrefs.SetString(nuevoNombre, valor);
+
+        //    // Guardar los cambios en PlayerPrefs
+        //    PlayerPrefs.Save();
+        //}
     }
+
+    public static string ObtenerNombre(string espacio, string nombre) => $"{espacio}:{nombre}";  // Modificar tambien el de SaveScript
 }
